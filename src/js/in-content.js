@@ -9,6 +9,7 @@ let strategiesManager = new StrategiesManager();
 switch(window.location.host) {
     case "elpais.com":
     case "www.abc.es":
+    case "okdiario.com":
         strategiesManager.strategy = new OneLayerPopUpStrgy();
         strategiesManager.doAction({popupClass: ".fc-ab-root"});
         break;
@@ -32,11 +33,21 @@ switch(window.location.host) {
         strategiesManager.strategy = new OneLayerPopUpStrgy();
         strategiesManager.doAction({popupClass: ".adsInfo__fullOpacity-1Kyc"});
         break;
+    case "www.libertaddigital.com":
+        strategiesManager.strategy = new OneLayerPopUpStrgy();
+        strategiesManager.doAction({popupClass: ".jquery-modal.blocker.current"});
+        break;
     case "www.elespanol.com":
         strategiesManager.strategy = new MultipleLayerAndClassStrgy();
         strategiesManager.doAction({
             popupClases: [".tp-modal", ".tp-backdrop"],
-            removeClases: [{ elem: "body", lassName: "tp-modal-open" }]
+            removeClases: [{ elem: "body", className: "tp-modal-open" }]
+        });
+        break;
+    case "www.elconfidencial.com":
+        strategiesManager.strategy = new MultipleLayerAndClassStrgy();
+        strategiesManager.doAction({
+            popupClases: [".adBlockMessage", ".abMessage"]
         });
         break;
     case "www.larioja.com":

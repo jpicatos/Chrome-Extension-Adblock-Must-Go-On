@@ -1,15 +1,25 @@
 import BaseStrgy from "./BaseStrgy";
 
-class MultipleLayerAndClassStrgy extends BaseStrgy{
+class MultipleLayerAndClassStrgy extends BaseStrgy {
     doAction(opts) {
-        setTimeout(() => {
+        var maxTimes = 0;
+        var interval = setInterval(() => {
             opts.popupClases.map(popupClass => {
                 var elem = document.querySelector(popupClass);
                 this.remove(elem)
             })
-            opts.removeClases.map(classToRemove => {
-                document.querySelector(classToRemove.elem).classList.remove(classToRemove.className)
-            })
+            debugger
+            if (opts.removeClases) {
+                opts.removeClases.map(classToRemove => {
+                    document.querySelector(classToRemove.elem).classList.remove(classToRemove.className)
+                })
+            }
+            document.querySelector("body").style.overflow = "unset";
+            document.querySelector("html").style.overflow = "unset";
+            maxTimes++;
+            if (maxTimes >= 2) {
+                clearInterval(interval)
+            }
         }, 2000);
     }
 }
