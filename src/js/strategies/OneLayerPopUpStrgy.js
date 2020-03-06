@@ -1,6 +1,6 @@
-import StrategiesManager from "./StrategiesManager";
+import BaseStrgy from "./BaseStrgy";
 
-class OneLayerPopUpStrgy extends StrategiesManager{
+class OneLayerPopUpStrgy extends BaseStrgy{
     doAction(opts) {
         setTimeout(() => {
             var popUp = document.querySelector(opts.popupClass);

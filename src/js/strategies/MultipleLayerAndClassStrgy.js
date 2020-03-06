@@ -1,6 +1,6 @@
-import StrategiesManager from "./StrategiesManager";
+import BaseStrgy from "./BaseStrgy";
 
-class MultipleLayerAndClassStrgy extends StrategiesManager{
+class MultipleLayerAndClassStrgy extends BaseStrgy{
     doAction(opts) {
         setTimeout(() => {
             opts.popupClases.map(popupClass => {

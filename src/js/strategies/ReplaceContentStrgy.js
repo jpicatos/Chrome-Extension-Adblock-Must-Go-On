@@ -1,6 +1,6 @@
-import StrategiesManager from "./StrategiesManager";
+import BaseStrgy from "./BaseStrgy";
 
-class ReplaceContentStrgy extends StrategiesManager {
+class ReplaceContentStrgy extends BaseStrgy {
     doAction(opts) {
         let maxTimes = 0;
         let contentPage

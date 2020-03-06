@@ -3,7 +3,7 @@ class StrategiesManager {
         this._strategy = null;
     }
 
-    set strategy(strategy) {
+    set strategy(strategy /* instance extends BaseStrategy */) {
         this._strategy = strategy;
     }
 
@@ -13,17 +13,6 @@ class StrategiesManager {
 
     doAction(opts) {
         this._strategy.doAction(opts);
-    }
-
-    // Common function to remove html element 
-    remove(elem) {
-        if (elem) {
-            if (typeof elem.remove === 'function') {
-                elem.remove();
-            } else {
-                elem.parentNode.removeChild(textField);
-            }
-        }
     }
 }
 
