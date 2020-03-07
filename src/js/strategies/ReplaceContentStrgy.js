@@ -1,4 +1,5 @@
 import BaseStrgy from "./BaseStrgy";
+import $ from "jquery";
 
 class ReplaceContentStrgy extends BaseStrgy {
     doAction(opts) {

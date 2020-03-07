@@ -9,10 +9,14 @@ let strategiesManager = new StrategiesManager();
 switch(window.location.host) {
     case "elpais.com":
     case "www.abc.es":
+    case "sevilla.abc.es":
     case "okdiario.com":
+    case "www.lavozdigital.es":
         strategiesManager.strategy = new OneLayerPopUpStrgy();
         strategiesManager.doAction({popupClass: ".fc-ab-root"});
         break;
+
+    // Mediaset
     case "www.telecinco.es":
     case "www.cuatro.com":
     case "www.factoriadeficcion.com":
@@ -50,7 +54,21 @@ switch(window.location.host) {
             popupClases: [".adBlockMessage", ".abMessage"]
         });
         break;
+
+    // Vocento
     case "www.larioja.com":
+    case "www.hoy.es":
+    case "www.elcorreo.com":
+    case "www.elnortedecastilla.es":
+    case "www.diariovasco.com":
+    case "www.elcomercio.es":
+    case "www.ideal.es":
+    case "www.diariosur.es":
+    case "www.lasprovincias.es":
+    case "www.eldiariomontanes.es":
+    case "www.laverdad.es":
+    case "www.leonoticias.com":
+    case "www.burgosconecta.es":
         strategiesManager.strategy = new ReplaceContentStrgy();
         strategiesManager.doAction({
             popupClass: "voc-landing-addblocker",
