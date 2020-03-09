@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Disable Anti-Adblock Popup",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Disable adblock popup",
     "icons": {
         "16": "favicon.png",
@@ -12,17 +12,14 @@
         "default_title": "Disable Anti-Adblock Popup",
         "default_popup": "popup.html"
     },
-    "content_scripts": [
-        {
-            "matches": ["<all_urls>"],
-            "js": ["in-content.js"]
-        }
-    ],
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["in-content.js"]
+    }],
     "background": {
         "scripts": ["background.js"]
     },
-    "content_security_policy":
-        "script-src 'self' 'unsafe-eval'; object-src 'self'; img-src * data: 'self' 'unsafe-eval'",
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; img-src * data: 'self' 'unsafe-eval'",
     "offline_enabled": true,
     "permissions": ["contextMenus"]
 }

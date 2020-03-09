@@ -3,7 +3,7 @@
     "version": "0.0.9",
     "description": "Chrome extension boilerplate, replace all values!",
     "main": "src/index.js",
-    "repository": "git@github.com:edrpls/chrome-extension-template.git",
+    "repository": "git@github.com:jpicatos/Disable-Anti-Adblock-Chrome-Extension",
     "license": "MIT",
     "devDependencies": {
         "babel-cli": "^6.26.0",

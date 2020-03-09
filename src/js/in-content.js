@@ -6,17 +6,17 @@ import MultipleLayerAndClassStrgy from "./strategies/MultipleLayerAndClassStrgy"
 import ReplaceContentStrgy from "./strategies/ReplaceContentStrgy";
 
 let strategiesManager = new StrategiesManager();
-switch(window.location.host) {
+switch (window.location.host) {
     case "elpais.com":
     case "www.abc.es":
     case "sevilla.abc.es":
     case "okdiario.com":
     case "www.lavozdigital.es":
         strategiesManager.strategy = new OneLayerPopUpStrgy();
-        strategiesManager.doAction({popupClass: ".fc-ab-root"});
+        strategiesManager.doAction({ popupClass: ".fc-ab-root" });
         break;
 
-    // Mediaset
+        // Mediaset
     case "www.telecinco.es":
     case "www.cuatro.com":
     case "www.factoriadeficcion.com":
@@ -31,15 +31,15 @@ switch(window.location.host) {
     case "www.niusdiario.es":
     case "www.cincomas.com":
         strategiesManager.strategy = new OneLayerPopUpStrgy();
-        strategiesManager.doAction({popupClass: ".adsInfo__container-UiYg"});
+        strategiesManager.doAction({ popupClass: ".adsInfo__container-UiYg" });
         break;
     case "www.mitele.es":
         strategiesManager.strategy = new OneLayerPopUpStrgy();
-        strategiesManager.doAction({popupClass: ".adsInfo__fullOpacity-1Kyc"});
+        strategiesManager.doAction({ popupClass: ".adsInfo__fullOpacity-1Kyc" });
         break;
     case "www.libertaddigital.com":
         strategiesManager.strategy = new OneLayerPopUpStrgy();
-        strategiesManager.doAction({popupClass: ".jquery-modal.blocker.current"});
+        strategiesManager.doAction({ popupClass: ".jquery-modal.blocker.current" });
         break;
     case "www.elespanol.com":
         strategiesManager.strategy = new MultipleLayerAndClassStrgy();
@@ -55,7 +55,7 @@ switch(window.location.host) {
         });
         break;
 
-    // Vocento
+        // Vocento
     case "www.larioja.com":
     case "www.hoy.es":
     case "www.elcorreo.com":
@@ -76,25 +76,39 @@ switch(window.location.host) {
             reloadLazyImages: true
         });
         break;
+    case "es.investing.com":
+        strategiesManager.strategy = new OneLayerPopUpStrgy();
+        strategiesManager.doAction({ popupClass: "#abPopup" });
+        break;
 }
 
 function isInUrl(stringArray) {
-  return stringArray.some(string => window.location.href.indexOf(string) >= 0)
+    return stringArray.some(string => window.location.href.indexOf(string) >= 0)
 }
 
 let lastRightClickElem;
 
 document.addEventListener("contextmenu", (evt) => {
-  lastRightClickElem = evt.target;
+    lastRightClickElem = evt.target;
 })
 
-chrome.extension.onMessage.addListener(function (message, sender, callback) {
-  if (message.functiontoInvoke == "holacaracola") {
-    while (lastRightClickElem.parentNode.nodeName != "BODY") {
-      lastRightClickElem = lastRightClickElem.parentNode;
-    };
-    remove(lastRightClickElem);
-    document.querySelector("body").style.overflow = "unset";
-    document.querySelector("html").style.overflow = "unset";
-  }
+chrome.extension.onMessage.addListener(function(message, sender, callback) {
+    if (message.functiontoInvoke == "holacaracola") {
+        while (lastRightClickElem.parentNode.nodeName != "BODY") {
+            lastRightClickElem = lastRightClickElem.parentNode;
+        };
+        remove(lastRightClickElem);
+        document.querySelector("body").style.overflow = "unset";
+        document.querySelector("html").style.overflow = "unset";
+    }
 });
+
+function remove(elem) {
+    if (elem) {
+        if (typeof elem.remove === 'function') {
+            elem.remove();
+        } else {
+            elem.parentNode.removeChild(textField);
+        }
+    }
+}
