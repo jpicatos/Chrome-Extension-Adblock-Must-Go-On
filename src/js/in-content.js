@@ -80,6 +80,10 @@ switch (window.location.host) {
         strategiesManager.strategy = new OneLayerPopUpStrgy();
         strategiesManager.doAction({ popupClass: "#abPopup" });
         break;
+    case "www.cnbc.com":
+        strategiesManager.strategy = new OneLayerPopUpStrgy();
+        strategiesManager.doAction({ popupClass: ".fEy1Z2XT " });
+        break;
 }
 
 function isInUrl(stringArray) {
