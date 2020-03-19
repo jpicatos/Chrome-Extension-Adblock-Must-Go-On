@@ -14,3 +14,24 @@ chrome.contextMenus.create({
     contexts: ["all"],
     onclick: getword
 });
+
+chrome.runtime.onMessage.addListener(function(request, sender) {
+    if (request.type == "changeIcon") {
+        if (request.options.pause) {
+            chrome.browserAction.setIcon({path: "extjav-pause-38.png"});
+        } else {
+            chrome.browserAction.setIcon({path: "48.png"});
+        }   
+    }
+});
+
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+    chrome.tabs.query({
+        "active": true,
+        "currentWindow": true
+    }, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+            "functiontoInvoke": "changeTab"
+        });
+    });
+});

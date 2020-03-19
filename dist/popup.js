@@ -1,1 +1,74 @@
-(function(a){function b(d){if(c[d])return c[d].exports;var e=c[d]={i:d,l:!1,exports:{}};return a[d].call(e.exports,e,e.exports,b),e.l=!0,e.exports}var c={};return b.m=a,b.c=c,b.d=function(a,c,d){b.o(a,c)||Object.defineProperty(a,c,{configurable:!1,enumerable:!0,get:d})},b.n=function(a){var c=a&&a.__esModule?function(){return a['default']}:function(){return a};return b.d(c,'a',c),c},b.o=function(a,b){return Object.prototype.hasOwnProperty.call(a,b)},b.p='',b(b.s=1)})([,function(module,exports){eval('// /* popup.js\n//  *\n//  * This file initializes its scripts after the popup has loaded.\n//  *\n//  * It shows how to access global variables from background.js.\n//  * Note that getViews could be used instead to access other scripts.\n//  *\n//  * A port to the active tab is open to send messages to its in-content.js script.\n//  *\n//  */\n\n// // Start the popup script, this could be anything from a simple script to a webapp\n// const initPopupScript = () => {\n//     // Access the background window object\n//     const backgroundWindow = chrome.extension.getBackgroundPage();\n//     // Do anything with the exposed variables from background.js\n//     console.log(backgroundWindow.sampleBackgroundGlobal);\n\n//     // This port enables a long-lived connection to in-content.js\n//     let port = null;\n\n//     // Send messages to the open port\n//     const sendPortMessage = message => port.postMessage(message);\n\n//     // Find the current active tab\n//     const getTab = () =>\n//         new Promise(resolve => {\n//             chrome.tabs.query(\n//                 {\n//                     active: true,\n//                     currentWindow: true\n//                 },\n//                 tabs => resolve(tabs[0])\n//             );\n//         });\n\n//     // Handle port messages\n//     const messageHandler = message => {\n//         console.log(\'popup.js - received message:\', message);\n//     };\n\n//     // Find the current active tab, then open a port to it\n//     getTab().then(tab => {\n//         // Connects to tab port to enable communication with inContent.js\n//         port = chrome.tabs.connect(tab.id, { name: \'chrome-extension-template\' });\n//         // Set up the message listener\n//         port.onMessage.addListener(messageHandler);\n//         // Send a test message to in-content.js\n//         sendPortMessage(\'Message from popup!\');\n//     });\n// };\n\n// // Fire scripts after page has loaded\n// document.addEventListener(\'DOMContentLoaded\', initPopupScript);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zcmMvanMvcG9wdXAuanM/MDIyNSJdLCJzb3VyY2VzQ29udGVudCI6WyIvLyAvKiBwb3B1cC5qc1xuLy8gICpcbi8vICAqIFRoaXMgZmlsZSBpbml0aWFsaXplcyBpdHMgc2NyaXB0cyBhZnRlciB0aGUgcG9wdXAgaGFzIGxvYWRlZC5cbi8vICAqXG4vLyAgKiBJdCBzaG93cyBob3cgdG8gYWNjZXNzIGdsb2JhbCB2YXJpYWJsZXMgZnJvbSBiYWNrZ3JvdW5kLmpzLlxuLy8gICogTm90ZSB0aGF0IGdldFZpZXdzIGNvdWxkIGJlIHVzZWQgaW5zdGVhZCB0byBhY2Nlc3Mgb3RoZXIgc2NyaXB0cy5cbi8vICAqXG4vLyAgKiBBIHBvcnQgdG8gdGhlIGFjdGl2ZSB0YWIgaXMgb3BlbiB0byBzZW5kIG1lc3NhZ2VzIHRvIGl0cyBpbi1jb250ZW50LmpzIHNjcmlwdC5cbi8vICAqXG4vLyAgKi9cblxuLy8gLy8gU3RhcnQgdGhlIHBvcHVwIHNjcmlwdCwgdGhpcyBjb3VsZCBiZSBhbnl0aGluZyBmcm9tIGEgc2ltcGxlIHNjcmlwdCB0byBhIHdlYmFwcFxuLy8gY29uc3QgaW5pdFBvcHVwU2NyaXB0ID0gKCkgPT4ge1xuLy8gICAgIC8vIEFjY2VzcyB0aGUgYmFja2dyb3VuZCB3aW5kb3cgb2JqZWN0XG4vLyAgICAgY29uc3QgYmFja2dyb3VuZFdpbmRvdyA9IGNocm9tZS5leHRlbnNpb24uZ2V0QmFja2dyb3VuZFBhZ2UoKTtcbi8vICAgICAvLyBEbyBhbnl0aGluZyB3aXRoIHRoZSBleHBvc2VkIHZhcmlhYmxlcyBmcm9tIGJhY2tncm91bmQuanNcbi8vICAgICBjb25zb2xlLmxvZyhiYWNrZ3JvdW5kV2luZG93LnNhbXBsZUJhY2tncm91bmRHbG9iYWwpO1xuXG4vLyAgICAgLy8gVGhpcyBwb3J0IGVuYWJsZXMgYSBsb25nLWxpdmVkIGNvbm5lY3Rpb24gdG8gaW4tY29udGVudC5qc1xuLy8gICAgIGxldCBwb3J0ID0gbnVsbDtcblxuLy8gICAgIC8vIFNlbmQgbWVzc2FnZXMgdG8gdGhlIG9wZW4gcG9ydFxuLy8gICAgIGNvbnN0IHNlbmRQb3J0TWVzc2FnZSA9IG1lc3NhZ2UgPT4gcG9ydC5wb3N0TWVzc2FnZShtZXNzYWdlKTtcblxuLy8gICAgIC8vIEZpbmQgdGhlIGN1cnJlbnQgYWN0aXZlIHRhYlxuLy8gICAgIGNvbnN0IGdldFRhYiA9ICgpID0+XG4vLyAgICAgICAgIG5ldyBQcm9taXNlKHJlc29sdmUgPT4ge1xuLy8gICAgICAgICAgICAgY2hyb21lLnRhYnMucXVlcnkoXG4vLyAgICAgICAgICAgICAgICAge1xuLy8gICAgICAgICAgICAgICAgICAgICBhY3RpdmU6IHRydWUsXG4vLyAgICAgICAgICAgICAgICAgICAgIGN1cnJlbnRXaW5kb3c6IHRydWVcbi8vICAgICAgICAgICAgICAgICB9LFxuLy8gICAgICAgICAgICAgICAgIHRhYnMgPT4gcmVzb2x2ZSh0YWJzWzBdKVxuLy8gICAgICAgICAgICAgKTtcbi8vICAgICAgICAgfSk7XG5cbi8vICAgICAvLyBIYW5kbGUgcG9ydCBtZXNzYWdlc1xuLy8gICAgIGNvbnN0IG1lc3NhZ2VIYW5kbGVyID0gbWVzc2FnZSA9PiB7XG4vLyAgICAgICAgIGNvbnNvbGUubG9nKCdwb3B1cC5qcyAtIHJlY2VpdmVkIG1lc3NhZ2U6JywgbWVzc2FnZSk7XG4vLyAgICAgfTtcblxuLy8gICAgIC8vIEZpbmQgdGhlIGN1cnJlbnQgYWN0aXZlIHRhYiwgdGhlbiBvcGVuIGEgcG9ydCB0byBpdFxuLy8gICAgIGdldFRhYigpLnRoZW4odGFiID0+IHtcbi8vICAgICAgICAgLy8gQ29ubmVjdHMgdG8gdGFiIHBvcnQgdG8gZW5hYmxlIGNvbW11bmljYXRpb24gd2l0aCBpbkNvbnRlbnQuanNcbi8vICAgICAgICAgcG9ydCA9IGNocm9tZS50YWJzLmNvbm5lY3QodGFiLmlkLCB7IG5hbWU6ICdjaHJvbWUtZXh0ZW5zaW9uLXRlbXBsYXRlJyB9KTtcbi8vICAgICAgICAgLy8gU2V0IHVwIHRoZSBtZXNzYWdlIGxpc3RlbmVyXG4vLyAgICAgICAgIHBvcnQub25NZXNzYWdlLmFkZExpc3RlbmVyKG1lc3NhZ2VIYW5kbGVyKTtcbi8vICAgICAgICAgLy8gU2VuZCBhIHRlc3QgbWVzc2FnZSB0byBpbi1jb250ZW50LmpzXG4vLyAgICAgICAgIHNlbmRQb3J0TWVzc2FnZSgnTWVzc2FnZSBmcm9tIHBvcHVwIScpO1xuLy8gICAgIH0pO1xuLy8gfTtcblxuLy8gLy8gRmlyZSBzY3JpcHRzIGFmdGVyIHBhZ2UgaGFzIGxvYWRlZFxuLy8gZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGluaXRQb3B1cFNjcmlwdCk7XG5cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc3JjL2pzL3BvcHVwLmpzIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///1\n')}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */,
+/* 1 */
+/***/ (function(module, exports) {
+
+eval("function playPause() {\n    let tab;\n    chrome.tabs.query({\n        currentWindow: true,\n        active: true\n    }, function (tabs) {\n        var activeTab = tabs[0];\n        tab = activeTab;\n        window.close();\n        chrome.tabs.sendMessage(activeTab.id, {\n            \"functiontoInvoke\": \"playPause\"\n        });\n    });\n}\n\ndocument.addEventListener(\"DOMContentLoaded\", function () {\n    document.getElementById(\"playPause\").addEventListener(\"click\", playPause);\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zcmMvanMvcG9wdXAuanM/MDIyNSJdLCJzb3VyY2VzQ29udGVudCI6WyJmdW5jdGlvbiBwbGF5UGF1c2UoKSB7XG4gICAgbGV0IHRhYjtcbiAgICBjaHJvbWUudGFicy5xdWVyeSh7XG4gICAgICAgIGN1cnJlbnRXaW5kb3c6IHRydWUsXG4gICAgICAgIGFjdGl2ZTogdHJ1ZVxuICAgIH0sIGZ1bmN0aW9uICh0YWJzKSB7XG4gICAgICAgIHZhciBhY3RpdmVUYWIgPSB0YWJzWzBdO1xuICAgICAgICB0YWIgPSBhY3RpdmVUYWI7XG4gICAgICAgIHdpbmRvdy5jbG9zZSgpO1xuICAgICAgICBjaHJvbWUudGFicy5zZW5kTWVzc2FnZShhY3RpdmVUYWIuaWQsIHtcbiAgICAgICAgICAgIFwiZnVuY3Rpb250b0ludm9rZVwiOiBcInBsYXlQYXVzZVwiXG4gICAgICAgIH0pO1xuICAgIH0pO1xufVxuXG5kb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKFwiRE9NQ29udGVudExvYWRlZFwiLCBmdW5jdGlvbiAoKSB7XG4gICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJwbGF5UGF1c2VcIikuYWRkRXZlbnRMaXN0ZW5lcihcImNsaWNrXCIsIHBsYXlQYXVzZSk7XG59KTtcblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc3JjL2pzL3BvcHVwLmpzIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBRkE7QUFJQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBREE7QUFHQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///1\n");
+
+/***/ })
+/******/ ]);

@@ -1,15 +1,15 @@
 {
     "manifest_version": 2,
-    "name": "Disable Anti-Adblock Popup",
-    "version": "1.0.1",
-    "description": "Disable adblock popup",
+    "name": "Fuera Anti-Adblock",
+    "version": "1.0.2",
+    "description": "Extensión que se encarga de eliminar el bloqueo de bloqueadores de publicidad que algunas páginas instalan",
     "icons": {
         "16": "16.png",
         "48": "48.png",
         "128": "128.png"
     },
     "browser_action": {
-        "default_title": "Disable Anti-Adblock Popup",
+        "default_title": "Fuera Anti-Adblock",
         "default_popup": "popup.html"
     },
     "content_scripts": [{
@@ -17,9 +17,10 @@
         "js": ["in-content.js"]
     }],
     "background": {
+        "persistance": true,
         "scripts": ["background.js"]
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; img-src * data: 'self' 'unsafe-eval'",
     "offline_enabled": true,
-    "permissions": ["contextMenus"]
+    "permissions": ["contextMenus", "tabs"]
 }

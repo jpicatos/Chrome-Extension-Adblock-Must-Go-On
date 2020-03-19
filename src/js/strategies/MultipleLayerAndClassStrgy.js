@@ -8,7 +8,6 @@ class MultipleLayerAndClassStrgy extends BaseStrgy {
                 var elem = document.querySelector(popupClass);
                 this.remove(elem)
             })
-            debugger
             if (opts.removeClases) {
                 opts.removeClases.map(classToRemove => {
                     document.querySelector(classToRemove.elem).classList.remove(classToRemove.className)
@@ -20,6 +19,7 @@ class MultipleLayerAndClassStrgy extends BaseStrgy {
             if (maxTimes >= 2) {
                 clearInterval(interval)
             }
+            maxTimes++;
         }, 2000);
     }
 }

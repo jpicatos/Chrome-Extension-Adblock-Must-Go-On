@@ -1,6 +1,5 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MinifyPlugin = require("babel-minify-webpack-plugin");
 const Crx = require('crx-webpack-plugin');
 const { version } = require('./package.json');
 
@@ -33,7 +32,6 @@ module.exports = {
             { from: './manifest.json' },
             { from: './src/images' },
             { from: './src/views' }
-        ]),
-        new MinifyPlugin()
+        ])
     ]
 };
