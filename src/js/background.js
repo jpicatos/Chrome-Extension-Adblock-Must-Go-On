@@ -18,7 +18,7 @@ chrome.contextMenus.create({
 chrome.runtime.onMessage.addListener(function(request, sender) {
     if (request.type == "changeIcon") {
         if (request.options.pause) {
-            chrome.browserAction.setIcon({path: "extjav-pause-38.png"});
+            chrome.browserAction.setIcon({path: "pause38.png"});
         } else {
             chrome.browserAction.setIcon({path: "48.png"});
         }   

@@ -106,6 +106,12 @@ function startBlock() {
                 popupClass: ".fEy1Z2XT "
             });
             break;
+        case "www.libremercado.com":
+            strategiesManager.strategy = new OneLayerPopUpStrgy();
+            strategiesManager.doAction({
+                popupClass: ".blocker "
+            });
+            break;
     }
 }
 

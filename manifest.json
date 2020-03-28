@@ -1,15 +1,16 @@
 {
     "manifest_version": 2,
-    "name": "Fuera Anti-Adblock",
-    "version": "1.0.2",
-    "description": "Extensión que se encarga de eliminar el bloqueo de bloqueadores de publicidad que algunas páginas instalan",
+    "name": "Adblock Must Go On",
+    "version": "1.1.3",
+    "description": "__MSG_appDesc__",
+    "default_locale": "en",
     "icons": {
         "16": "16.png",
         "48": "48.png",
         "128": "128.png"
     },
     "browser_action": {
-        "default_title": "Fuera Anti-Adblock",
+        "default_title": "Adblock Must Go On",
         "default_popup": "popup.html"
     },
     "content_scripts": [{

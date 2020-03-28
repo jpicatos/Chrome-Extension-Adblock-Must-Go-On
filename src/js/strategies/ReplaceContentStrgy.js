@@ -14,12 +14,12 @@ class ReplaceContentStrgy extends BaseStrgy {
             } else {
                 $(opts.contentLabel).html() ? contentPage = $(opts.contentLabel).html() : null
             }
-            if (maxTimes >= 26) {
+            if (maxTimes >= 100) {
                 clearInterval(intervall);
                 return;
             }
             maxTimes++;
-        }, 250);
+        }, 100);
     }
 
     reloadImages(contentLabel) {

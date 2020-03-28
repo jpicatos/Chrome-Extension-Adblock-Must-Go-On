@@ -1,18 +1,16 @@
 body {
     margin: 0;
+    background-color: #000000cc;
 }
 
 .wrapper {
     width: 270px;
+    color: white;
 }
 
 .wrapper .title {
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    height: 60px;
     padding: 0 10px;
-    font-size: 20px;
+    padding-bottom: 8px;
     margin-top: 8px;
     margin-left: 8px;
     margin-right: 8px;
@@ -20,13 +18,12 @@ body {
 }
 
 .wrapper .title .titleIcon {
-    height: 40px;
-    width: 40px;
-    background-image: url("./favicon.png");
-    background-image: url("./extjav.png");
+    height: 54px;
+    width: 100%;
+    background-image: url("./big-logo.png");
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: left;
     margin-right: 10px;
 }
 
@@ -46,6 +43,6 @@ body {
 }
 
 .wrapper .options .option:hover {
-    transition: all 0.5s ease-in-out;
-    background-color: lightgray;
+    /* transition: all 0.5s ease-in-out; */
+    background-color: #5f5f5fcc;
 }
