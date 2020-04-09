@@ -9,7 +9,9 @@ class BaseStrgy {
                 elem = this.getTopElement(elem)
             }
             elem.remove();
-            chrome.runtime.sendMessage({ type: "popupremoved" });
+            document.querySelector("body").setAttribute("style", "overflow: unset !important; position: unset !important");
+            document.querySelector("html").setAttribute("style", "overflow: unset !important; position: unset !important");
+            this.notifyToBadgeText();
         }
     }
 
@@ -19,6 +21,11 @@ class BaseStrgy {
             topElem = topElem.parentNode;
         };
         return topElem
+    }
+
+    notifyToBadgeText() {
+        chrome.runtime.sendMessage({ type: "popupremoved" });
+        localStorage.setItem('popUpWasRemoved', true);
     }
 }
 

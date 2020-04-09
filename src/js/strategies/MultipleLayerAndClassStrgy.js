@@ -13,8 +13,6 @@ class MultipleLayerAndClassStrgy extends BaseStrgy {
                     document.querySelector(classToRemove.elem).classList.remove(classToRemove.className)
                 })
             }
-            document.querySelector("body").style.overflow = "unset";
-            document.querySelector("html").style.overflow = "unset";
             maxTimes++;
             if (maxTimes >= 5) {
                 clearInterval(interval)

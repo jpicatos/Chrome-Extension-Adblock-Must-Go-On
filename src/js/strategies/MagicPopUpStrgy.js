@@ -44,7 +44,7 @@ class MagicPopUpStrgy extends BaseStrgy {
             if (this.potentialSimilarity(document.body.innerHTML)) {
                 var popUp = this.searchPopUp(document.body);
                 if (popUp) {
-                    this.close(popUp);
+                    this.remove(popUp);
                     clearInterval(intervalo)
                 }
             }
@@ -96,23 +96,6 @@ class MagicPopUpStrgy extends BaseStrgy {
         var potentialPopUp = this.getTopElement(element);
         return potentialPopUp.style.position === "absolute" || potentialPopUp.style.position === "fixed" ||
             getComputedStyle(potentialPopUp).position === "absolute" || getComputedStyle(potentialPopUp).position === "fixed";
-    }
-
-    getTopElement(element) {
-        var topElem = element;
-        while (topElem.parentNode.nodeName != "BODY") {
-            topElem = topElem.parentNode;
-        };
-        return topElem
-    }
-
-    close(popUp) {
-        popUp.remove();
-        document.querySelector("body").style.overflow = "unset";
-        document.querySelector("html").style.overflow = "unset";
-        document.querySelector("body").style.position = "unset";
-        document.querySelector("html").style.position = "unset";
-        chrome.runtime.sendMessage({ type: "popupremoved" });
     }
 }
 export default MagicPopUpStrgy;

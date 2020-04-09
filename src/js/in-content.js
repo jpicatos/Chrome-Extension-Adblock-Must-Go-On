@@ -4,17 +4,20 @@ import OneLayerPopUpStrgy from "./strategies/OneLayerPopUpStrgy";
 import MultipleLayerAndClassStrgy from "./strategies/MultipleLayerAndClassStrgy";
 import ReplaceContentStrgy from "./strategies/ReplaceContentStrgy";
 import MagicPopUpStrgy from "./strategies/MagicPopUpStrgy";
+import ManualStrgy from "./strategies/ManualStrgy";
+import IconCtrl from "./controllers/IconCtrl";
 
+let strategiesManager = new StrategiesManager();
+let iconCtrl = new IconCtrl();
 
-if (isAntiAdblockPaused()) {
-    changeIcon(true);
-} else {
-    changeIcon(false)
-    startBlock();
-}
+!iconCtrl.isAntiAdblockPaused() ? startBlock() : null;
+iconCtrl.changeIcon(iconCtrl.isAntiAdblockPaused());
+
+localStorage.removeItem('popUpWasRemoved');
+chrome.runtime.sendMessage({ type: "removeBadge" });
+
 
 function startBlock() {
-    let strategiesManager = new StrategiesManager();
     switch (window.location.host) {
         case "elpais.com":
         case "www.abc.es":
@@ -163,6 +166,8 @@ function startBlock() {
     }
 }
 
+
+//listeners
 let lastRightClickElem;
 
 document.addEventListener("contextmenu", (evt) => {
@@ -171,62 +176,17 @@ document.addEventListener("contextmenu", (evt) => {
 
 chrome.extension.onMessage.addListener((message, sender, callback) => {
     if (message.functiontoInvoke == "holacaracola") {
-        while (lastRightClickElem.parentNode.nodeName != "BODY") {
-            lastRightClickElem = lastRightClickElem.parentNode;
-        };
-        remove(lastRightClickElem);
-        document.querySelector("body").style.overflow = "unset";
-        document.querySelector("html").style.overflow = "unset";
+        strategiesManager.strategy = new ManualStrgy();
+        strategiesManager.doAction({ elem: lastRightClickElem });
     }
     if (message.functiontoInvoke == "playPause") {
-        changeIconIfNeeded();
-        setTimeout(() => {
-            location.reload()
-            window.location.reload();
-        }, 100);
+        iconCtrl.changeIconIfNeeded();
     }
     if (message.functiontoInvoke == "isPause") {
-        callback(isAntiAdblockPaused());
+        callback(iconCtrl.isAntiAdblockPaused());
     }
     if (message.functiontoInvoke == "changeTab") {
-        if (isAntiAdblockPaused()) {
-            changeIcon(true);
-        } else {
-            changeIcon(false);
-        }
+        iconCtrl.changeIcon(iconCtrl.isAntiAdblockPaused());
+        callback(localStorage.getItem('popUpWasRemoved'));
     }
 });
-
-function remove(elem) {
-    if (elem) {
-        chrome.runtime.sendMessage({ type: "popupremoved" });
-        if (typeof elem.remove === 'function') {
-            elem.remove();
-        } else {
-            elem.parentNode.removeChild(textField);
-        }
-    }
-}
-
-function changeIconIfNeeded() {
-    if (!isAntiAdblockPaused()) {
-        localStorage.setItem('pauseAntiAdblock', true);
-        changeIcon(true);
-    } else {
-        localStorage.setItem('pauseAntiAdblock', false);
-        changeIcon(false);
-    }
-}
-
-function changeIcon(pause) {
-    chrome.runtime.sendMessage({
-        type: "changeIcon",
-        options: {
-            pause: pause,
-        }
-    });
-}
-
-function isAntiAdblockPaused() {
-    return localStorage.getItem('pauseAntiAdblock') === "true";
-}

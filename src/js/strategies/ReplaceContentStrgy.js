@@ -11,7 +11,7 @@ class ReplaceContentStrgy extends BaseStrgy {
             if (document.querySelector(opts.popupClass)) {
                 $(opts.contentLabel).html() ? $(opts.contentLabel).html(contentPage) : null;
                 opts.reloadLazyImages ? this.reloadImages(opts.contentLabel) : null;
-                chrome.runtime.sendMessage({ type: "popupremoved" });
+                this.notifyToBadgeText();
                 clearInterval(intervall);
                 return;
             } else {
