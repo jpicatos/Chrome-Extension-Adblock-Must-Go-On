@@ -3,6 +3,8 @@ import StrategiesManager from "./strategies/StrategiesManager";
 import OneLayerPopUpStrgy from "./strategies/OneLayerPopUpStrgy";
 import MultipleLayerAndClassStrgy from "./strategies/MultipleLayerAndClassStrgy";
 import ReplaceContentStrgy from "./strategies/ReplaceContentStrgy";
+import MagicPopUpStrgy from "./strategies/MagicPopUpStrgy";
+
 
 if (isAntiAdblockPaused()) {
     changeIcon(true);
@@ -19,6 +21,9 @@ function startBlock() {
         case "sevilla.abc.es":
         case "okdiario.com":
         case "www.lavozdigital.es":
+        case "www.ojogo.pt":
+        case "www.dn.pt":
+        case "www.heraldo.es":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: ".fc-ab-root"
@@ -48,12 +53,6 @@ function startBlock() {
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: ".adsInfo__fullOpacity-1Kyc"
-            });
-            break;
-        case "www.libertaddigital.com":
-            strategiesManager.strategy = new OneLayerPopUpStrgy();
-            strategiesManager.doAction({
-                popupClass: ".jquery-modal.blocker.current"
             });
             break;
         case "www.elespanol.com":
@@ -89,9 +88,16 @@ function startBlock() {
         case "www.burgosconecta.es":
             strategiesManager.strategy = new ReplaceContentStrgy();
             strategiesManager.doAction({
-                popupClass: "voc-landing-addblocker",
+                popupClass: ".voc-landing-addblocker",
                 contentLabel: "[data-voc-adbd-layer]",
                 reloadLazyImages: true
+            });
+            break;
+        case "www.soy502.com":
+            strategiesManager.strategy = new ReplaceContentStrgy();
+            strategiesManager.doAction({
+                popupClass: ".adBlocker",
+                contentLabel: ".home"
             });
             break;
         case "es.investing.com":
@@ -106,17 +112,55 @@ function startBlock() {
                 popupClass: ".fEy1Z2XT "
             });
             break;
-        case "www.libremercado.com":
+        case "www.washingtonpost.com":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
-                popupClass: ".blocker "
+                popupClass: ".k_tati_pbu__qbl_n__"
             });
             break;
-    }
-}
+        case "www.thetimes.co.uk":
+            strategiesManager.strategy = new OneLayerPopUpStrgy();
+            strategiesManager.doAction({
+                popupClass: "#sp_message_container_101175"
+            });
+            break;
 
-function isInUrl(stringArray) {
-    return stringArray.some(string => window.location.href.indexOf(string) >= 0)
+
+        case "www.libremercado.com":
+        case "www.libertaddigital.com":
+        case "esradio.libertaddigital.com":
+        case "tv.libertaddigital.com":
+            strategiesManager.strategy = new OneLayerPopUpStrgy();
+            strategiesManager.doAction({
+                popupClass: ".jquery-modal.blocker.current"
+            });
+            break;
+        case "www.dailymail.co.uk":
+            strategiesManager.strategy = new OneLayerPopUpStrgy();
+            strategiesManager.doAction({
+                popupClass: ".wrapper-3AzfF",
+                goToTop: true
+            });
+            break;
+        case "www.independent.co.uk":
+            strategiesManager.strategy = new MultipleLayerAndClassStrgy();
+            strategiesManager.doAction({
+                popupClases: [".tp-iframe-wrapper.tp-active", ".tp-backdrop.tp-active"],
+                goToTop: true
+            });
+            break;
+        case "andaluciainformacion.es":
+            strategiesManager.strategy = new MultipleLayerAndClassStrgy();
+            strategiesManager.doAction({
+                popupClases: ["#modal-adblock", ".modal-overlay"],
+            });
+            break;
+        default:
+            strategiesManager.strategy = new MagicPopUpStrgy();
+            strategiesManager.doAction();
+            break;
+
+    }
 }
 
 let lastRightClickElem;
@@ -141,6 +185,9 @@ chrome.extension.onMessage.addListener((message, sender, callback) => {
             window.location.reload();
         }, 100);
     }
+    if (message.functiontoInvoke == "isPause") {
+        callback(isAntiAdblockPaused());
+    }
     if (message.functiontoInvoke == "changeTab") {
         if (isAntiAdblockPaused()) {
             changeIcon(true);
@@ -152,6 +199,7 @@ chrome.extension.onMessage.addListener((message, sender, callback) => {
 
 function remove(elem) {
     if (elem) {
+        chrome.runtime.sendMessage({ type: "popupremoved" });
         if (typeof elem.remove === 'function') {
             elem.remove();
         } else {
@@ -163,7 +211,6 @@ function remove(elem) {
 function changeIconIfNeeded() {
     if (!isAntiAdblockPaused()) {
         localStorage.setItem('pauseAntiAdblock', true);
-        // callback({pause:true})
         changeIcon(true);
     } else {
         localStorage.setItem('pauseAntiAdblock', false);

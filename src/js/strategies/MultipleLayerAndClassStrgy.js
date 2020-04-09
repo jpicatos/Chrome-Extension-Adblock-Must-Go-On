@@ -6,7 +6,7 @@ class MultipleLayerAndClassStrgy extends BaseStrgy {
         var interval = setInterval(() => {
             opts.popupClases.map(popupClass => {
                 var elem = document.querySelector(popupClass);
-                this.remove(elem)
+                this.remove(elem, opts.goToTop)
             })
             if (opts.removeClases) {
                 opts.removeClases.map(classToRemove => {
@@ -16,7 +16,7 @@ class MultipleLayerAndClassStrgy extends BaseStrgy {
             document.querySelector("body").style.overflow = "unset";
             document.querySelector("html").style.overflow = "unset";
             maxTimes++;
-            if (maxTimes >= 2) {
+            if (maxTimes >= 5) {
                 clearInterval(interval)
             }
             maxTimes++;
