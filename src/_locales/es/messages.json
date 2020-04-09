@@ -1,10 +1,16 @@
 {
     "appName": {
-      "message": "My App",
-      "description": "The title of the application, displayed in the web store."
+        "message": "My App",
+        "description": "The title of the application, displayed in the web store."
     },
     "appDesc": {
-      "message": "Extensión que elimina el aviso que obliga a detener Adblock", 
-      "description":"The description of the application, displayed in the web store."
+        "message": "Complemento del bloqueador de anuncios - Extensión que elimina el aviso que obliga a detener Adblock",
+        "description": "The description of the application, displayed in the web store."
+    },
+    "playExtension": {
+        "message": "Activar en este sitio"
+    },
+    "pauseExtension": {
+        "message": "Pausar en este sitio"
     }
-  }
+}
