@@ -25,13 +25,13 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     }
 
     if (request.type == "popupremoved") {
-        chrome.browserAction.setBadgeBackgroundColor({ color: "#333333" });
-        chrome.browserAction.setBadgeText({ text: "✓" });
+        // chrome.browserAction.setBadgeBackgroundColor({ color: "#333333" });
+        // chrome.browserAction.setBadgeText({ text: "✓" });
     }
 });
 
 chrome.tabs.onActivated.addListener(function(activeInfo) {
-    chrome.browserAction.setBadgeText({ text: "" });
+    // chrome.browserAction.setBadgeText({ text: "" });
     chrome.tabs.query({
         "active": true,
         "currentWindow": true
