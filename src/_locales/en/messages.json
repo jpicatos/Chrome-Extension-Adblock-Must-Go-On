@@ -1,10 +1,16 @@
 {
     "appName": {
-      "message": "My App",
-      "description": "The title of the application, displayed in the web store."
+        "message": "My App",
+        "description": "The title of the application, displayed in the web store."
     },
     "appDesc": {
-      "message": "Extension who removes the advise that obligates to pause Adblock", 
-      "description":"The description of the application, displayed in the web store."
+        "message": "Ad Blocker Add-on - Extension who removes the advise that obligates to pause Adblock",
+        "description": "The description of the application, displayed in the web store."
+    },
+    "playExtension": {
+        "message": "Activate in this site"
+    },
+    "pauseExtension": {
+        "message": "Pause in this site"
     }
-  }
+}

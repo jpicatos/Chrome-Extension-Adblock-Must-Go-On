@@ -1,17 +1,13 @@
 import BaseStrgy from "./BaseStrgy";
 
-class OneLayerPopUpStrgy extends BaseStrgy{
+class OneLayerPopUpStrgy extends BaseStrgy {
     doAction(opts) {
         let maxTimes = 0;
         let intervalo = setInterval(() => {
             var popUp = document.querySelector(opts.popupClass);
-            this.remove(popUp)
-            document.querySelector("body").style.overflow = "unset";
-            document.querySelector("html").style.overflow = "unset";
-            document.querySelector("body").style.position = "unset";
-            document.querySelector("html").style.position = "unset";
+            this.remove(popUp, opts.goToTop)
             console.log(maxTimes)
-            if (maxTimes >= 2) {
+            if (maxTimes >= 5) {
                 clearInterval(intervalo)
             }
             maxTimes++;

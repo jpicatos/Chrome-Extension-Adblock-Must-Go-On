@@ -38,6 +38,7 @@
     },
     "dependencies": {
         "jquery": "^3.4.1",
-        "nodemon": "^1.14.12"
+        "nodemon": "^1.14.12",
+        "string-similarity": "^4.0.1"
     }
 }

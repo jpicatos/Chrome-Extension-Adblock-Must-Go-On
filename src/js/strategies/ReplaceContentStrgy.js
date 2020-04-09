@@ -5,26 +5,29 @@ class ReplaceContentStrgy extends BaseStrgy {
     doAction(opts) {
         let maxTimes = 0;
         let contentPage
+
+        $(opts.contentLabel).html() ? contentPage = $(opts.contentLabel).html() : null
         var intervall = setInterval(() => {
-            if (document.getElementsByClassName(opts.popupClass)[0]) {
+            if (document.querySelector(opts.popupClass)) {
                 $(opts.contentLabel).html() ? $(opts.contentLabel).html(contentPage) : null;
                 opts.reloadLazyImages ? this.reloadImages(opts.contentLabel) : null;
+                this.notifyToBadgeText();
                 clearInterval(intervall);
                 return;
             } else {
                 $(opts.contentLabel).html() ? contentPage = $(opts.contentLabel).html() : null
             }
-            if (maxTimes >= 100) {
+            if (maxTimes >= 200) {
                 clearInterval(intervall);
                 return;
             }
             maxTimes++;
-        }, 100);
+        }, 50);
     }
 
     reloadImages(contentLabel) {
         $(`${contentLabel} img.lazy`).css("opacity", "1");
-        $(`${contentLabel} img.lazy`).each(function () {
+        $(`${contentLabel} img.lazy`).each(function() {
             var $t = $(this);
             $t.attr({
                 src: $t.attr('data-original')
