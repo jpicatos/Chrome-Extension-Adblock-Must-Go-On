@@ -3,7 +3,7 @@
 ![anuncio grande](/assets/anuncio%20grande.jpg)
 
 ## Introduction
-Ad Blocker Add-on - **Google Chrome Extension** who removes the advise that obligates to pause Adblock
+Ad Blocker Add-on - **Google Chrome Extension** who removes the advise that obligates to pause Adblock.
 This extension takes care of removing those annoying alerts that force you to pause your ad blocker and cause you to view their ads.
 
 It is compatible with any blocker, such as AdBlock, uBlock, AdblockPlus...
