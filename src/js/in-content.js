@@ -159,6 +159,7 @@ function startBlock() {
             });
             break;
         default:
+            //known working fernava.com and all before
             strategiesManager.strategy = new MagicPopUpStrgy();
             strategiesManager.doAction();
             break;

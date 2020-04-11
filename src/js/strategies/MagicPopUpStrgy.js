@@ -15,7 +15,8 @@ const knownPopUpTexts = [
     "Desactivar tu bloqueador es sencillo.",
     "Tu navegador utiliza un bloqueador que impide el correcto funcionamiento de esta página",
     "Nos hemos dado cuenta de que utiliza un bloqueo de publicidad",
-    "Puede apoyarnos gratuitamente permitiendo anuncios"
+    "Puede apoyarnos gratuitamente permitiendo anuncios",
+    "DESACTIVAR ADBLOCK / DISABLE ADBLOCK"
 ];
 
 const knownPopUpTextsEN = [
@@ -31,7 +32,8 @@ const knownPopUpTextsEN = [
     "Deactivating your blocker is simple.",
     "Your browser uses a blocker that prevents this page from working properly.",
     "We've noticed that you're using an ad block",
-    "You can support us for free by allowing ads."
+    "You can support us for free by allowing ads.",
+    " DESACTIVAR ADBLOCK / DISABLE ADBLOCK"
 ]
 
 let lang = "es";
@@ -44,6 +46,7 @@ class MagicPopUpStrgy extends BaseStrgy {
             if (this.potentialSimilarity(document.body.innerHTML)) {
                 var popUp = this.searchPopUp(document.body);
                 if (popUp) {
+                    this.brotherOverlay();
                     this.remove(popUp);
                     clearInterval(intervalo)
                 }
@@ -74,8 +77,9 @@ class MagicPopUpStrgy extends BaseStrgy {
     }
 
     potentialSimilarity(text) {
-        var isPoten = text.includes("publicidad") || text.includes("anuncios") || text.includes("bloqueador") || text.includes("adblocker");
-        var isPotenEN = text.includes("advertising") || text.includes("ads") || text.includes("blocker") || text.includes("adblocker");
+        text = text.toLowerCase();
+        var isPoten = text.includes("publicidad") || text.includes("anuncios") || text.includes("bloqueador") || text.includes("adblocker") || text.includes("adblock");
+        var isPotenEN = text.includes("advertising") || text.includes("ads") || text.includes("blocker") || text.includes("adblocker") || text.includes("adblock");
         isPoten ? lang = "es" : null;
         isPotenEN ? lang = "en" : null;
         return isPoten || isPotenEN;
@@ -96,6 +100,18 @@ class MagicPopUpStrgy extends BaseStrgy {
         var potentialPopUp = this.getTopElement(element);
         return potentialPopUp.style.position === "absolute" || potentialPopUp.style.position === "fixed" ||
             getComputedStyle(potentialPopUp).position === "absolute" || getComputedStyle(potentialPopUp).position === "fixed";
+    }
+
+    brotherOverlay() {
+        let bodyChildrens = Array.from(document.body.children);
+        bodyChildrens = bodyChildrens.filter(children =>
+            children.children.length <= 0 &&
+            (children.style.opacity < 1 || getComputedStyle(children).opacity < 1) &&
+            (children.tagName == "DIV" || children.tagName == "SPAN") &&
+            ((children.style.display && children.style.display != "none") || (getComputedStyle(children).display && getComputedStyle(children).display != "none")) &&
+            children.offsetHeight >= window.innerHeight);
+
+        bodyChildrens.map(children => this.remove(children));
     }
 }
 export default MagicPopUpStrgy;
