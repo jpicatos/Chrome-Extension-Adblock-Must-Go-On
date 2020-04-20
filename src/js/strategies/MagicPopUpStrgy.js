@@ -93,7 +93,7 @@ class MagicPopUpStrgy extends BaseStrgy {
         } else {
             similarity = stringSimilarity.findBestMatch(text, knownPopUpTextsEN)
         }
-        return similarity.bestMatch.rating > 0.35;
+        return similarity.bestMatch.rating > 0.38;
     }
 
     isPotentialPopUp(element) {
