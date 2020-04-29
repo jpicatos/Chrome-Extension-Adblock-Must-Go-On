@@ -6,6 +6,8 @@ import ReplaceContentStrgy from "./strategies/ReplaceContentStrgy";
 import MagicPopUpStrgy from "./strategies/MagicPopUpStrgy";
 import ManualStrgy from "./strategies/ManualStrgy";
 import IconCtrl from "./controllers/IconCtrl";
+import { parseDomain, fromUrl } from "parse-domain";
+import { toUnicode } from "punycode";
 
 let strategiesManager = new StrategiesManager();
 let iconCtrl = new IconCtrl();
@@ -16,17 +18,22 @@ iconCtrl.changeIcon(iconCtrl.isAntiAdblockPaused());
 localStorage.removeItem('popUpWasRemoved');
 chrome.runtime.sendMessage({ type: "removeBadge" });
 
+const { subDomains, domain, topLevelDomains } = parseDomain(
+    fromUrl(window.location.host),
+);
+
+const parsedDomain = toUnicode(domain);
+console.log(parsedDomain);
 
 function startBlock() {
-    switch (window.location.host) {
-        case "elpais.com":
-        case "www.abc.es":
-        case "sevilla.abc.es":
-        case "okdiario.com":
-        case "www.lavozdigital.es":
-        case "www.ojogo.pt":
-        case "www.dn.pt":
-        case "www.heraldo.es":
+    switch (parsedDomain) {
+        case "elpais":
+        case "abc":
+        case "okdiario":
+        case "lavozdigital":
+        case "ojogo":
+        case "dn":
+        case "heraldo":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: ".fc-ab-root"
@@ -34,31 +41,31 @@ function startBlock() {
             break;
 
             // Mediaset
-        case "www.telecinco.es":
-        case "www.cuatro.com":
-        case "www.factoriadeficcion.com":
-        case "www.energytv.es":
-        case "www.divinity.es":
-        case "www.bemad.es":
-        case "www.eltiempohoy.es":
-        case "www.mediaset.es":
-        case "www.mtmad.es":
-        case "www.yasss.es":
-        case "www.uppers.es":
-        case "www.niusdiario.es":
-        case "www.cincomas.com":
+        case "telecinco":
+        case "cuatro":
+        case "factoriadeficcion":
+        case "energytv":
+        case "divinity":
+        case "bemad":
+        case "eltiempohoy":
+        case "mediaset":
+        case "mtmad":
+        case "yasss":
+        case "uppers":
+        case "niusdiario":
+        case "cincomas":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: ".adsInfo__container-UiYg"
             });
             break;
-        case "www.mitele.es":
+        case "mitele":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: ".adsInfo__fullOpacity-1Kyc"
             });
             break;
-        case "www.elespanol.com":
+        case "elespanol":
             strategiesManager.strategy = new MultipleLayerAndClassStrgy();
             strategiesManager.doAction({
                 popupClases: [".tp-modal", ".tp-backdrop"],
@@ -68,7 +75,7 @@ function startBlock() {
                 }]
             });
             break;
-        case "www.elconfidencial.com":
+        case "elconfidencial":
             strategiesManager.strategy = new MultipleLayerAndClassStrgy();
             strategiesManager.doAction({
                 popupClases: [".adBlockMessage", ".abMessage"]
@@ -76,19 +83,19 @@ function startBlock() {
             break;
 
             // Vocento
-        case "www.larioja.com":
-        case "www.hoy.es":
-        case "www.elcorreo.com":
-        case "www.elnortedecastilla.es":
-        case "www.diariovasco.com":
-        case "www.elcomercio.es":
-        case "www.ideal.es":
-        case "www.diariosur.es":
-        case "www.lasprovincias.es":
-        case "www.eldiariomontanes.es":
-        case "www.laverdad.es":
-        case "www.leonoticias.com":
-        case "www.burgosconecta.es":
+        case "larioja":
+        case "hoy":
+        case "elcorreo":
+        case "elnortedecastilla":
+        case "diariovasco":
+        case "elcomercio":
+        case "ideal":
+        case "diariosur":
+        case "lasprovincias":
+        case "eldiariomontanes":
+        case "laverdad":
+        case "leonoticias":
+        case "burgosconecta":
             strategiesManager.strategy = new ReplaceContentStrgy();
             strategiesManager.doAction({
                 popupClass: ".voc-landing-addblocker",
@@ -96,32 +103,32 @@ function startBlock() {
                 reloadLazyImages: true
             });
             break;
-        case "www.soy502.com":
+        case "soy502":
             strategiesManager.strategy = new ReplaceContentStrgy();
             strategiesManager.doAction({
                 popupClass: ".adBlocker",
                 contentLabel: ".home"
             });
             break;
-        case "es.investing.com":
+        case "es.investing":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: "#abPopup"
             });
             break;
-        case "www.cnbc.com":
+        case "cnbc":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: ".fEy1Z2XT "
             });
             break;
-        case "www.washingtonpost.com":
+        case "washingtonpost":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: ".k_tati_pbu__qbl_n__"
             });
             break;
-        case "www.thetimes.co.uk":
+        case "thetimes":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: "#sp_message_container_101175"
@@ -129,30 +136,28 @@ function startBlock() {
             break;
 
 
-        case "www.libremercado.com":
-        case "www.libertaddigital.com":
-        case "esradio.libertaddigital.com":
-        case "tv.libertaddigital.com":
+        case "libremercado":
+        case "libertaddigital":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: ".jquery-modal.blocker.current"
             });
             break;
-        case "www.dailymail.co.uk":
+        case "dailymail":
             strategiesManager.strategy = new OneLayerPopUpStrgy();
             strategiesManager.doAction({
                 popupClass: ".wrapper-3AzfF",
                 goToTop: true
             });
             break;
-        case "www.independent.co.uk":
+        case "independent":
             strategiesManager.strategy = new MultipleLayerAndClassStrgy();
             strategiesManager.doAction({
                 popupClases: [".tp-iframe-wrapper.tp-active", ".tp-backdrop.tp-active"],
                 goToTop: true
             });
             break;
-        case "andaluciainformacion.es":
+        case "andaluciainformacion":
             strategiesManager.strategy = new MultipleLayerAndClassStrgy();
             strategiesManager.doAction({
                 popupClases: ["#modal-adblock", ".modal-overlay"],
