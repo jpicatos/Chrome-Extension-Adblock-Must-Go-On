@@ -6,10 +6,15 @@ let messageService = new MessageService();
 let iconCtrl = new IconCtrl();
 let badgeCtrl = new BadgeCtrl();
 
+function holacaracola() {
+    messageService.sendMsgToContent(null, { "functiontoInvoke": "holacaracola" }, () => {});
+}
+
+
 chrome.contextMenus.create({
     title: "Eliminar popup",
     contexts: ["all"],
-    onclick: messageService.sendMsgToContent(null, { "functiontoInvoke": "holacaracola" })
+    onclick: holacaracola
 });
 
 // listiners
