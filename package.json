@@ -37,7 +37,7 @@
         "verbose": true
     },
     "dependencies": {
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "nodemon": "^1.14.12",
         "parse-domain": "^3.0.1",
         "punycode": "^2.1.1",
