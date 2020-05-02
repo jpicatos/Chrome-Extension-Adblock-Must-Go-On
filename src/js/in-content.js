@@ -12,12 +12,6 @@ import { toUnicode } from "punycode";
 let strategiesManager = new StrategiesManager();
 let iconCtrl = new IconCtrl();
 
-!iconCtrl.isAntiAdblockPaused() ? startBlock() : null;
-iconCtrl.changeIcon(iconCtrl.isAntiAdblockPaused());
-
-localStorage.removeItem('popUpWasRemoved');
-chrome.runtime.sendMessage({ type: "removeBadge" });
-
 const { subDomains, domain, topLevelDomains } = parseDomain(
     fromUrl(window.location.host),
 );
@@ -25,7 +19,15 @@ const { subDomains, domain, topLevelDomains } = parseDomain(
 const parsedDomain = toUnicode(domain);
 console.log(parsedDomain);
 
-function startBlock() {
+!iconCtrl.isAntiAdblockPaused() ? startBlock(parsedDomain) : null;
+iconCtrl.changeIcon(iconCtrl.isAntiAdblockPaused());
+
+localStorage.removeItem('popUpWasRemoved');
+chrome.runtime.sendMessage({ type: "removeBadge" });
+
+
+
+function startBlock(parsedDomain) {
     switch (parsedDomain) {
         case "elpais":
         case "abc":
