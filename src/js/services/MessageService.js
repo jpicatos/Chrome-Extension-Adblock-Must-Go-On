@@ -1,14 +1,16 @@
 class MessageService {
     sendMsgToContent(insideFunc, params, handleResp) {
-        let tab;
         chrome.tabs.query({
             currentWindow: true,
             active: true
         }, function(tabs) {
-            var activeTab = tabs[0];
-            tab = activeTab;
+            var activeTab = tabs[0] || {};
             insideFunc ? insideFunc() : null;
-            chrome.tabs.sendMessage(activeTab.id, params, handleResp);
+            if (handleResp) {
+                chrome.tabs.sendMessage(activeTab.id, params, handleResp);
+            } else {
+                chrome.tabs.sendMessage(activeTab.id, params);
+            }
         });
     }
 }
