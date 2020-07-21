@@ -9,22 +9,24 @@ import IconCtrl from "./controllers/IconCtrl";
 import { parseDomain, fromUrl } from "parse-domain";
 import { toUnicode } from "punycode";
 
+const whitelist = ["google"];
+
+
 let strategiesManager = new StrategiesManager();
 let iconCtrl = new IconCtrl();
 
 const { subDomains, domain, topLevelDomains } = parseDomain(
     fromUrl(window.location.host),
 );
+if (domain) {
+    const parsedDomain = toUnicode(domain);
 
-const parsedDomain = toUnicode(domain);
-console.log(parsedDomain);
+    !iconCtrl.isAntiAdblockPaused() ? startBlock(parsedDomain) : null;
+    iconCtrl.changeIcon(iconCtrl.isAntiAdblockPaused());
 
-!iconCtrl.isAntiAdblockPaused() ? startBlock(parsedDomain) : null;
-iconCtrl.changeIcon(iconCtrl.isAntiAdblockPaused());
-
-localStorage.removeItem('popUpWasRemoved');
-chrome.runtime.sendMessage({ type: "removeBadge" });
-
+    localStorage.removeItem('popUpWasRemoved');
+    chrome.runtime.sendMessage({ type: "removeBadge" });
+}
 
 
 function startBlock(parsedDomain) {
@@ -42,7 +44,7 @@ function startBlock(parsedDomain) {
             });
             break;
 
-            // Mediaset
+        // Mediaset
         case "telecinco":
         case "cuatro":
         case "factoriadeficcion":
@@ -84,7 +86,7 @@ function startBlock(parsedDomain) {
             });
             break;
 
-            // Vocento
+        // Vocento
         case "larioja":
         case "hoy":
         case "elcorreo":
@@ -166,12 +168,20 @@ function startBlock(parsedDomain) {
             });
             break;
         default:
+            if (isInWhitelist(parsedDomain)) {
+                console.log(`[AMGN] Domain "${parsedDomain}" is whitelisted`);
+                break;
+            }
             //known working fernava.com and all before
             strategiesManager.strategy = new MagicPopUpStrgy();
             strategiesManager.doAction();
             break;
 
     }
+}
+
+function isInWhitelist(domain) {
+    return whitelist.includes(domain);
 }
 
 
