@@ -17,9 +17,10 @@ const { subDomains, domain, topLevelDomains } = parseDomain(
 );
 
 const parsedDomain = toUnicode(domain);
+const whiteList = ['google', 'youtube'];
 console.log(parsedDomain);
 
-!iconCtrl.isAntiAdblockPaused() ? startBlock(parsedDomain) : null;
+!iconCtrl.isAntiAdblockPaused() && !whiteList.includes(parsedDomain) ? startBlock(parsedDomain) : null;
 iconCtrl.changeIcon(iconCtrl.isAntiAdblockPaused());
 
 localStorage.removeItem('popUpWasRemoved');
