@@ -6,7 +6,6 @@ class OneLayerPopUpStrgy extends BaseStrgy {
         let intervalo = setInterval(() => {
             var popUp = document.querySelector(opts.popupClass);
             this.remove(popUp, opts.goToTop)
-            console.log(maxTimes)
             if (maxTimes >= 5) {
                 clearInterval(intervalo)
             }
