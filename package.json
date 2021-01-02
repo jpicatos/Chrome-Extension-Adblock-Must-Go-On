@@ -1,6 +1,6 @@
 {
     "name": "adblock-must-go-on",
-    "version": "1.4.3",
+    "version": "1.5.0",
     "description": "Ad Blocker Add-on - Extension who removes the advise that obligates to pause Adblock",
     "main": "src/index.js",
     "repository": "git@github.com:jpicatos/Chrome-Extension-Adblock-Must-Go-On",

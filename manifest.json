@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Adblock Must Go On",
-    "version": "1.4.3",
+    "version": "1.5.0",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
     "icons": {
