@@ -62,9 +62,16 @@ function startBlock(parsedDomain) {
             });
             break;
         case "mitele":
-            strategiesManager.strategy = new OneLayerPopUpStrgy();
+            strategiesManager.strategy = new OneLayerPopUpStrgy(); // sc-1wr0y1r-0
             strategiesManager.doAction({
                 popupClass: ".adsInfo__fullOpacity-1Kyc"
+            });
+            break;
+    
+        case "atresplayer":
+            strategiesManager.strategy = new OneLayerPopUpStrgy();
+            strategiesManager.doAction({
+                popupClass: ".sc-1wr0y1r-0"
             });
             break;
         case "elespanol":
@@ -83,7 +90,6 @@ function startBlock(parsedDomain) {
                 popupClases: [".adBlockMessage", ".abMessage"]
             });
             break;
-
         // Vocento
         case "larioja":
         case "hoy":
