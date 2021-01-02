@@ -42,12 +42,13 @@ class MagicPopUpStrgy extends BaseStrgy {
 
     doAction() {
         let maxTimes = 0;
+        this.popUpSimilarity = 0;
         let intervalo = setInterval(() => {
             if (this.potentialSimilarity(document.body.innerHTML)) {
                 var popUp = this.searchPopUp(document.body);
                 if (popUp) {
                     this.brotherOverlay();
-                    this.remove(popUp);
+                    this.remove(popUp, false, this.popUpSimilarity);
                     clearInterval(intervalo)
                 }
             }
@@ -93,13 +94,14 @@ class MagicPopUpStrgy extends BaseStrgy {
         } else {
             similarity = stringSimilarity.findBestMatch(text, knownPopUpTextsEN)
         }
+        this.popUpSimilarity = similarity.bestMatch.rating;
         return similarity.bestMatch.rating > 0.38;
     }
 
     isPotentialPopUp(element) {
         var potentialPopUp = this.getTopElement(element);
-        return potentialPopUp.style.position === "absolute" || potentialPopUp.style.position === "fixed" ||
-            getComputedStyle(potentialPopUp).position === "absolute" || getComputedStyle(potentialPopUp).position === "fixed";
+        return (potentialPopUp.tagName == "DIV" || potentialPopUp.tagName == "SPAN") && (potentialPopUp.style.position === "absolute" || potentialPopUp.style.position === "fixed" ||
+            getComputedStyle(potentialPopUp).position === "absolute" || getComputedStyle(potentialPopUp).position === "fixed");
     }
 
     brotherOverlay() {
