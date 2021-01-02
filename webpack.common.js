@@ -1,7 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const Crx = require('crx-webpack-plugin');
-const { version } = require('./package.json');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -15,10 +14,9 @@ module.exports = {
     },
 
     cache: true,
-    devtool: 'eval-cheap-module-source-map',
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js?$/,
                 include: [path.resolve(__dirname, 'src')],
@@ -28,11 +26,12 @@ module.exports = {
     },
 
     plugins: [
-        new CopyWebpackPlugin([
+        new CleanWebpackPlugin(),
+        new CopyWebpackPlugin({patterns: [
             { from: './manifest.json' },
             { from: './src/images' },
             { from: './src/views' },
             { from: './src/_locales', to: "_locales"}
-        ])
+        ]})
     ]
 };

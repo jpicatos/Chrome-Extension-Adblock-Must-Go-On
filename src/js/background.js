@@ -24,7 +24,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     }
 
     if (request.type == "popupremoved") {
-        badgeCtrl.setBadge();
+        badgeCtrl.setBadge(request.options.popupSimilarity);
     }
 
     if (request.type == "removeBadge") {

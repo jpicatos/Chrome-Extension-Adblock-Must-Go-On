@@ -25,10 +25,13 @@ npm install
 ```
 
 ## Usage
-
-To build the extension:
+To serve the extension in development mode:
+```
+npm start
+```
+To build the extension to production:
 ```
 npm run build
 ```
 
-This command will create a `dist/` directory, it will contain the built files that should be loaded into the browser or packed.
+Both commands will create a `dist/` directory, it will contain the built files that should be loaded into the browser or packed.

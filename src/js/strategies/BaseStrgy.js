@@ -3,15 +3,16 @@ class BaseStrgy {
     doAction() {}
 
     // Common function to remove html element 
-    remove(elem, removeRoot) {
+    remove(elem, removeRoot, popupSimilarity) {
         if (elem) {
             if (removeRoot) {
                 elem = this.getTopElement(elem)
             }
+            console.log(elem);
             elem.remove();
             document.querySelector("body").setAttribute("style", "overflow: unset !important; position: unset !important");
             document.querySelector("html").setAttribute("style", "overflow: unset !important; position: unset !important");
-            this.notifyToBadgeText();
+            this.notifyToBadgeText(popupSimilarity);
         }
     }
 
@@ -23,8 +24,8 @@ class BaseStrgy {
         return topElem
     }
 
-    notifyToBadgeText() {
-        chrome.runtime.sendMessage({ type: "popupremoved" });
+    notifyToBadgeText(popupSimilarity) {
+        chrome.runtime.sendMessage({ type: "popupremoved", options: {popupSimilarity} });
         localStorage.setItem('popUpWasRemoved', true);
     }
 }
